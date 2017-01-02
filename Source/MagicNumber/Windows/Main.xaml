@@ -1,0 +1,27 @@
+﻿<windows:FrameContainerWindow x:Class="MagicNumber.Windows.Main"
+                              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+                              xmlns:windows="clr-namespace:MagicNumber.Windows"
+                              mc:Ignorable="d"
+                              Height="728"
+                              MinHeight="630"
+                              Width="1034"
+                              MinWidth="800"
+                              Title="Main">
+    <!--<i:Interaction.Behaviors>
+        <behavior:PersistLocation KeyName="MainWindowPlacement" />
+    </i:Interaction.Behaviors>-->
+    <Grid>
+        <Frame x:Name="MainFrame"
+               DockPanel.Dock="Top"
+               Source="../Pages/Splash.xaml"
+               NavigationUIVisibility="Hidden"
+               Background="Transparent" />
+    </Grid>
+</windows:FrameContainerWindow>
+
+
+
