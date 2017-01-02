@@ -111,10 +111,15 @@
     </Compile>
     <Compile Include="Core\Extensions\EnumerableExtensions.cs" />
     <Compile Include="Core\Model\Config.cs" />
+    <Compile Include="Core\Model\Server.cs" />
     <Compile Include="Core\Model\Set.cs" />
+    <Compile Include="Core\ViewModel\AddSet.cs" />
     <Compile Include="Core\ViewModel\Connect.cs" />
     <Compile Include="Core\ViewModel\Home.cs" />
     <Compile Include="Core\ViewModel\TryConnect.cs" />
+    <Compile Include="Pages\AddSet.xaml.cs">
+      <DependentUpon>AddSet.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\Connect.xaml.cs">
       <DependentUpon>Connect.xaml</DependentUpon>
     </Compile>
@@ -168,6 +173,10 @@
   <ItemGroup />
   <ItemGroup>
     <Page Include="Controls\LeiLogo.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\AddSet.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
