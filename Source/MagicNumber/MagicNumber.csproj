@@ -110,6 +110,7 @@
       <DependentUpon>LeiLogo.xaml</DependentUpon>
     </Compile>
     <Compile Include="Core\Extensions\EnumerableExtensions.cs" />
+    <Compile Include="Core\Model\Config.cs" />
     <Compile Include="Core\Model\Set.cs" />
     <Compile Include="Core\ViewModel\Connect.cs" />
     <Compile Include="Core\ViewModel\Home.cs" />

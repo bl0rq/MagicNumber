@@ -19,9 +19,11 @@ namespace MagicNumber
 
             Utilis.Runner.Dispatcher = new Utilis.Win.DispatcherWrapper ( System.Windows.Application.Current.Dispatcher );
 
-            IoC.Start ( );
+            Utilis.Messaging.Bus.Instance.Send ( new Core.Messages.LoadingProgress ( "Loading config..." ) );
+            var config = new Core.Model.Config ( "." );
+            config.Load ( );
 
-            //await Task.Delay ( TimeSpan.FromSeconds ( 1 ) );
+            IoC.Start ( config );
 
             Utilis.Messaging.Bus.Instance.Send ( new Core.Messages.LoadingProgress ( "Building Main Window..." ) );
             Windows.Main mainWindow = null;
@@ -34,7 +36,19 @@ namespace MagicNumber
             var service = StartNavigation ( mainWindow );
 
             Utilis.Messaging.Bus.Instance.Send ( new Core.Messages.LoadingProgress ( "Showing initial Page..." ) );
-            service.Navigate ( Utilis.ServiceLocator.Instance.GetInstance<Core.ViewModel.Home> ( ) );
+
+            if ( string.IsNullOrEmpty ( config.ServerName ) )
+            {
+                var vm = Utilis.ServiceLocator.Instance.GetInstance<Core.ViewModel.Connect> ( );
+                vm.ServerName = "magicNumber.blorq.com:15613";
+                service.Navigate ( vm );
+            }
+            else
+            {
+                var vm = new Core.ViewModel.TryConnect ( config.ServerName );
+                service.Navigate ( vm );
+            }
+
         }
 
         private Utilis.UI.Navigation.IService StartNavigation ( Windows.FrameContainerWindow mainWindow )

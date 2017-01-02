@@ -10,7 +10,7 @@ namespace MagicNumber
 {
     public static class IoC
     {
-        public static void Start ( )
+        public static void Start ( Core.Model.Config config )
         {
             ContainerBuilder builder = new ContainerBuilder ( );
 
@@ -21,7 +21,10 @@ namespace MagicNumber
             //    .AsSelf ( )
             //    .SingleInstance ( );
 
-            //TODO: add classes here
+            builder.Register ( context => config )
+                .AsSelf ( )
+                .AsImplementedInterfaces ( )
+                .SingleInstance ( );
 
             Utilis.ServiceLocator.Instance = new Utilis.ServiceLocator ( builder.Build ( ) );
         }

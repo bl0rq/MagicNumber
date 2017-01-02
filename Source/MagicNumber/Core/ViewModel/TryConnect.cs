@@ -29,6 +29,11 @@ namespace MagicNumber.Core.ViewModel
                 server.Load ( );
                 Message = "Loaded " + server.Sets.Length + " sets.";
 
+                var config = Utilis.ServiceLocator.Instance.GetInstance<Model.Config> ( );
+                config.ServerName = ServerName;
+                config.Save ( );
+                Message = "Saved server name.";
+
                 navigationService.NavigateAndRemoveCurrentFromBackStack ( new Home ( server ) );
             }
             catch ( Exception e )
