@@ -59,8 +59,27 @@ namespace MagicNumber
                     new Utilis.UI.ViewMapper ( new Utilis.UI.ViewFinder ( ), GetType ( ).Assembly ) );
 
             Utilis.ServiceLocator.Instance.RegisterInstance<Utilis.UI.Navigation.IService> ( service );
+            Navigate.Set ( service );
 
             return service;
+        }
+    }
+
+    public static class Navigate
+    {
+        public static Utilis.UI.Navigation.IService m_navigationService;
+
+        public static void Set ( Utilis.UI.Navigation.IService service )
+        {
+            m_navigationService = service;
+        }
+
+        public static bool To<T> ( T vm, bool removeFromBackStack = false ) where T : Utilis.UI.ViewModel.Base
+        {
+            if ( removeFromBackStack )
+                return m_navigationService.NavigateAndRemoveCurrentFromBackStack ( vm );
+            else
+                return m_navigationService.Navigate ( vm );
         }
     }
 }
