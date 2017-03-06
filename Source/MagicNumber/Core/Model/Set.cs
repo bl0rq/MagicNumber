@@ -18,9 +18,29 @@ namespace MagicNumber.Core.Model
         public Guid Id { get; set; }
 
         [DataMember]
-        [MaxLength ( 512 )]
+        [MaxLength(512)]
         public string Name { get; set; }
+
         [DataMember]
         public int BlockSize { get; set; }
+
+        //NO DataMember, as this gets loaded separately!
+        public int CurrentBlock { get; set; }
+    }
+
+    public class MySet
+    {
+        [DataMember]
+        [Key]
+        public Guid Id { get; set; }
+
+        [DataMember]
+        public int Block { get; set; }
+
+        [DataMember]
+        public uint Index { get; set; }
+
+        [DataMember]
+        public DateTimeOffset LastUpdated { get; set; }
     }
 }

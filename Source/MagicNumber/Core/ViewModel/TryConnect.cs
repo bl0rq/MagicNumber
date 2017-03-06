@@ -20,7 +20,7 @@ namespace MagicNumber.Core.ViewModel
         private void DoTryConnect ( )
         {
             var navigationService = Utilis.ServiceLocator.Instance.GetInstance<Utilis.UI.Navigation.IService> ( );
-
+            var localServer = Utilis.ServiceLocator.Instance.GetInstance<Model.ILocalServer> ( );
             Message = "Trying to connect...";
             try
             {
@@ -34,7 +34,7 @@ namespace MagicNumber.Core.ViewModel
                 config.Save ( );
                 Message = "Saved server name.";
 
-                navigationService.NavigateAndRemoveCurrentFromBackStack ( new Home ( server ) );
+                navigationService.NavigateAndRemoveCurrentFromBackStack ( new Home ( server, localServer ) );
             }
             catch ( Exception e )
             {

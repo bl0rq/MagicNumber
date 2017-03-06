@@ -9,11 +9,13 @@ namespace MagicNumber.Core.ViewModel
     public class AddSet : Utilis.UI.ViewModel.Base
     {
         private readonly Model.IServer m_server;
+        private readonly Model.ILocalServer m_localServer;
 
-        public AddSet ( Model.IServer server )
+        public AddSet ( Model.IServer server, Model.ILocalServer localServer )
         {
             Utilis.Contract.AssertNotNull ( ( ) => server, server );
             m_server = server;
+            m_localServer = localServer;
             DoAddSet = new Utilis.UI.DelegateCommand ( AddToServer, ( ) => IsValidName );
         }
 
@@ -21,8 +23,8 @@ namespace MagicNumber.Core.ViewModel
         {
             try
             {
-                m_server.Add ( new Model.Set ( ) { BlockSize = BlockSize, Name = SetName, Id = Guid.NewGuid ( ) } );
-                Navigate.To ( new Home ( m_server ) );
+                m_server.Add ( new Model.Set ( ) { BlockSize = BlockSize, Name = SetName, Id = Guid.NewGuid ( ) }, InitialBlock );
+                Navigate.To ( new Home ( m_server, m_localServer ) );
             }
             catch ( Exception e )
             {
@@ -84,17 +86,34 @@ namespace MagicNumber.Core.ViewModel
         public int BlockSize
         {
             get { return m_blockSize; }
-            set { SetProperty ( ref m_blockSize, value ); }
+            set
+            {
+                if ( SetProperty ( ref m_blockSize, value ) )
+                    OnPropertyChanged ( ( ) => InitialNumber );
+            }
         }
+
+        private int m_initialBlock;
+        public int InitialBlock
+        {
+            get { return m_initialBlock; }
+            set
+            {
+                if ( SetProperty ( ref m_initialBlock, value ) )
+                    OnPropertyChanged ( ( ) => InitialNumber );
+            }
+        }
+
+        public int InitialNumber => BlockSize * InitialBlock + 1;
 
         public int [] BlockSizes { get; } = new [] { 100, 128, 200, 256, 500, 512, 1000, 1024 };
     }
 
     public class AddSetDesign : AddSet
     {
-        public AddSetDesign ( ) : base ( new Model.FakeServer ( ) { Name = "Some Server Name" } )
+        public AddSetDesign ( ) : base ( new Model.FakeServer ( ) { Name = "Some Server Name" }, new Model.FakeLocalServer ( ) )
         {
-
+            InitialBlock = 15;
         }
     }
 }
