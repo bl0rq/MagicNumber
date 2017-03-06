@@ -1,0 +1,16 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <SolidColorBrush x:Key="ErrorForeground"
+                     Color="#B54050" />
+
+    <SolidColorBrush x:Key="brsPositiveBackground"
+                     Color="#52A239" />
+    <SolidColorBrush x:Key="brsNegativeBackground"
+                     Color="#BFBA43" />
+    <SolidColorBrush x:Key="brsErrorBackground"
+                     Color="#B54050" />
+    <SolidColorBrush x:Key="brsIndeterminedBackground"
+                     Color="LightGray" />
+    <SolidColorBrush x:Key="brsNotReadyBackground"
+                     Color="#FF5555FF" />
+</ResourceDictionary>

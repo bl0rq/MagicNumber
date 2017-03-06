@@ -1,24 +1,25 @@
 ﻿<MagicNumber:BaseApplication x:Class="MagicNumber.App"
-                           xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                           xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                           xmlns:MagicNumber="clr-namespace:MagicNumber"
-                           StartupUri="Windows/Splash.xaml">
+                             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                             xmlns:MagicNumber="clr-namespace:MagicNumber"
+                             StartupUri="Windows/Splash.xaml">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colors.xaml" />
-                <!-- Accent and AppTheme setting -->
+                <!--  Accent and AppTheme setting  -->
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
 
+                <ResourceDictionary Source="Resources/Colors.xaml" />
                 <ResourceDictionary Source="Resources/Core.xaml" />
                 <ResourceDictionary Source="Resources/Tile.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
-            <SolidColorBrush Color="Magenta"
-                             x:Key="logoMainBrush" />
+            <SolidColorBrush x:Key="logoMainBrush"
+                             Color="Magenta" />
         </ResourceDictionary>
     </Application.Resources>
 </MagicNumber:BaseApplication>

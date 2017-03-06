@@ -7,25 +7,24 @@
     <system:Double x:Key="ExtraLargeFontSize">20</system:Double>
     <system:Double x:Key="ExtraExtraLargeFontSize">30</system:Double>
 
-    <Style TargetType="TextBlock"
-           x:Key="{x:Type TextBlock}">
+    <Style x:Key="{x:Type TextBlock}"
+           TargetType="TextBlock">
         <Style.Setters>
-            <Setter Property="FontFamily"
-                    Value="Segoe UI" />
-            <Setter Property="FontSize"
-                    Value="{DynamicResource RegularFontSize}" />
+            <Setter Property="FontFamily" Value="Segoe UI" />
+            <Setter Property="FontSize" Value="{DynamicResource RegularFontSize}" />
         </Style.Setters>
     </Style>
 
-    <Style TargetType="ComboBox"
-           x:Key="{x:Type ComboBox}">
+    <Style x:Key="{x:Type ComboBox}"
+           TargetType="ComboBox">
         <Style.Setters>
-            <Setter Property="FontFamily"
-                    Value="Segoe UI" />
-            <Setter Property="FontSize"
-                    Value="{DynamicResource RegularFontSize}" />
-            <Setter Property="Padding"
-                    Value="15,5" />
+            <Setter Property="FontFamily" Value="Segoe UI" />
+            <Setter Property="FontSize" Value="{DynamicResource RegularFontSize}" />
+            <Setter Property="Padding" Value="15,5" />
         </Style.Setters>
     </Style>
+
+    <Style x:Key="{x:Type Button}"
+           BasedOn="{StaticResource SquareMetroButton}"
+           TargetType="Button" />
 </ResourceDictionary>
