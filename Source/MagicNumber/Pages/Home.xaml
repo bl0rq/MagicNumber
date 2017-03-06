@@ -3,6 +3,7 @@
                 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                 xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
                 xmlns:converter="clr-namespace:Utilis.Win.Converter;assembly=Utilis.Win"
+                xmlns:core="clr-namespace:MagicNumber.Core"
                 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                 xmlns:local="clr-namespace:MagicNumber.Pages"
                 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -16,6 +17,19 @@
                 mc:Ignorable="d">
     <local:HomeBase.Resources>
         <system:Double x:Key="tileGraphicOpacity">.2</system:Double>
+        <core:SetBrushConverter x:Key="convSetBrush"
+                                TileBrush1="{StaticResource tileColor1}"
+                                TileBrush10="{StaticResource tileColor10}"
+                                TileBrush11="{StaticResource tileColor11}"
+                                TileBrush12="{StaticResource tileColor12}"
+                                TileBrush2="{StaticResource tileColor2}"
+                                TileBrush3="{StaticResource tileColor3}"
+                                TileBrush4="{StaticResource tileColor4}"
+                                TileBrush5="{StaticResource tileColor5}"
+                                TileBrush6="{StaticResource tileColor6}"
+                                TileBrush7="{StaticResource tileColor7}"
+                                TileBrush8="{StaticResource tileColor8}"
+                                TileBrush9="{StaticResource tileColor9}" />
     </local:HomeBase.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -23,17 +37,8 @@
             <RowDefinition />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <StackPanel Orientation="Horizontal">
-            <TextBlock Text="Connected to " />
-            <TextBlock Text="{Binding Server.Name}" />
-        </StackPanel>
         <ItemsControl Grid.Row="1"
                       ItemsSource="{Binding Sets}">
-            <ItemsControl.Resources>
-                <converter:BoolToBrush x:Key="convSelectedColor"
-                                       FalseBrush="#EBFDFD"
-                                       TrueBrush="LightGreen" />
-            </ItemsControl.Resources>
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <WrapPanel />
@@ -42,18 +47,43 @@
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <controls:Tile Title="{Binding Timestamp}"
-                                   Background="LightGreen"
+                                   HorizontalContentAlignment="Stretch"
+                                   VerticalContentAlignment="Stretch"
+                                   Background="{Binding Converter={StaticResource convSetBrush}}"
                                    Command="{Binding Command}"
-                                   Foreground="Black">
+                                   Foreground="#f3ddec">
                         <controls:Tile.Content>
-                            <Grid>
+                            <Grid HorizontalAlignment="Stretch"
+                                  VerticalAlignment="Stretch">
                                 <Viewbox Margin="30,30,30,30">
-                                    <Path Data="M349.658,118.254l20.986-30.542l32.918,22.725l-20.891,30.402 C372.492,132.249,361.441,124.661,349.658,118.254z M225.722,49.12v47.701c9.872-1.532,19.982-2.331,30.277-2.331 c10.102,0,20.028,0.768,29.723,2.243V49.12H225.722z M427.693,291.185c0,94.824-76.867,171.695-171.694,171.695 c-94.825,0-171.693-76.871-171.693-171.695c0-94.823,76.868-171.694,171.693-171.694 C350.826,119.49,427.693,196.361,427.693,291.185z M382.693,291.185c0-70.031-56.676-126.694-126.694-126.694 c-70.031,0-126.693,56.678-126.693,126.694c0,70.031,56.677,126.695,126.693,126.695 C326.031,417.88,382.693,361.204,382.693,291.185z M289.264,300.227c0,17.396-14.104,31.5-31.5,31.5 c-17.397,0-31.5-14.104-31.5-31.5c0-11.301,5.955-21.207,14.895-26.766l11.525-86.607c0.236-1.949,1.87-3.428,3.833-3.471 c1.962-0.042,3.658,1.364,3.98,3.301l13.33,86.447C283.066,278.621,289.264,288.698,289.264,300.227z"
+                                    <!--<Path Data="M349.658,118.254l20.986-30.542l32.918,22.725l-20.891,30.402 C372.492,132.249,361.441,124.661,349.658,118.254z M225.722,49.12v47.701c9.872-1.532,19.982-2.331,30.277-2.331 c10.102,0,20.028,0.768,29.723,2.243V49.12H225.722z M427.693,291.185c0,94.824-76.867,171.695-171.694,171.695 c-94.825,0-171.693-76.871-171.693-171.695c0-94.823,76.868-171.694,171.693-171.694 C350.826,119.49,427.693,196.361,427.693,291.185z M382.693,291.185c0-70.031-56.676-126.694-126.694-126.694 c-70.031,0-126.693,56.678-126.693,126.694c0,70.031,56.677,126.695,126.693,126.695 C326.031,417.88,382.693,361.204,382.693,291.185z M289.264,300.227c0,17.396-14.104,31.5-31.5,31.5 c-17.397,0-31.5-14.104-31.5-31.5c0-11.301,5.955-21.207,14.895-26.766l11.525-86.607c0.236-1.949,1.87-3.428,3.833-3.471 c1.962-0.042,3.658,1.364,3.98,3.301l13.33,86.447C283.066,278.621,289.264,288.698,289.264,300.227z"
                                           Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType=controls:Tile, Mode=FindAncestor}}"
                                           Opacity="{StaticResource tileGraphicOpacity}"
-                                          Stretch="UniformToFill" />
+                                          Stretch="UniformToFill" />-->
+                                    <Canvas Width="70"
+                                            Height="70">
+                                        <Polygon Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType=controls:Tile, Mode=FindAncestor}}"
+                                                 FillRule="NonZero"
+                                                 Opacity="{StaticResource tileGraphicOpacity}"
+                                                 Points="48.393,5 49.688,14.341 53.907,15.719 49.688,17.096 48.393,26.222 47.086,17.096 42.878,15.719 47.086,14.341 " />
+                                        <Polygon Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType=controls:Tile, Mode=FindAncestor}}"
+                                                 FillRule="NonZero"
+                                                 Opacity="{StaticResource tileGraphicOpacity}"
+                                                 Points="35.755,9.415 37.977,25.361 45.182,27.713 37.977,30.058 35.755,45.645 33.535,30.058 26.339,27.713 33.535,25.361   " />
+                                        <Polygon Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType=controls:Tile, Mode=FindAncestor}}"
+                                                 FillRule="NonZero"
+                                                 Opacity="{StaticResource tileGraphicOpacity}"
+                                                 Points="54.668,28.12 55.971,37.413 60.161,38.777 55.971,40.15 54.668,49.225 53.379,40.15 49.193,38.777 53.379,37.413   " />
+                                        <Polygon Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType=controls:Tile, Mode=FindAncestor}}"
+                                                 FillRule="NonZero"
+                                                 Opacity="{StaticResource tileGraphicOpacity}"
+                                                 Points="15.34,43.896 16.631,53.182 20.822,54.555 16.631,55.925 15.34,65 14.049,55.925 9.839,54.555 14.049,53.182 " />
+
+                                    </Canvas>
                                 </Viewbox>
-                                <TextBlock Text="{Binding Model.Name}" />
+                                <TextBlock Margin="3,3,0,0"
+                                           FontSize="{StaticResource LargeFontSize}"
+                                           Text="{Binding Model.Name}" />
                                 <TextBlock HorizontalAlignment="Center"
                                            VerticalAlignment="Center"
                                            FontSize="{StaticResource ExtraExtraLargeFontSize}"
@@ -65,6 +95,15 @@
             </ItemsControl.ItemTemplate>
         </ItemsControl>
 
+        <StackPanel Grid.Row="2"
+                    VerticalAlignment="Bottom"
+                    Orientation="Horizontal">
+            <TextBlock FontSize="{StaticResource LargeFontSize}"
+                       Text="Connected to " />
+            <TextBlock FontSize="{StaticResource LargeFontSize}"
+                       Text="{Binding Server.Name}" />
+        </StackPanel>
+
         <Button Grid.Row="2"
                 HorizontalAlignment="Right"
                 Background="{StaticResource brsPositiveBackground}"
@@ -74,3 +113,4 @@
                 FontSize="{StaticResource ExtraExtraLargeFontSize}" />
     </Grid>
 </local:HomeBase>
+

@@ -13,4 +13,29 @@
                      Color="LightGray" />
     <SolidColorBrush x:Key="brsNotReadyBackground"
                      Color="#FF5555FF" />
+
+    <SolidColorBrush x:Key="tileColor1"
+                     Color="#FF903373" />
+    <SolidColorBrush x:Key="tileColor2"
+                     Color="#33907D" />
+    <SolidColorBrush x:Key="tileColor3"
+                     Color="#903346" />
+    <SolidColorBrush x:Key="tileColor4"
+                     Color="#469033" />
+    <SolidColorBrush x:Key="tileColor5"
+                     Color="#904F33" />
+    <SolidColorBrush x:Key="tileColor6"
+                     Color="#4F3390" />
+    <SolidColorBrush x:Key="tileColor7"
+                     Color="#334690" />
+    <SolidColorBrush x:Key="tileColor8"
+                     Color="#749033" />
+    <SolidColorBrush x:Key="tileColor9"
+                     Color="#7D3390" />
+    <SolidColorBrush x:Key="tileColor10"
+                     Color="#337490" />
+    <SolidColorBrush x:Key="tileColor11"
+                     Color="#907D33" />
+    <SolidColorBrush x:Key="tileColor12"
+                     Color="#33904F" />
 </ResourceDictionary>

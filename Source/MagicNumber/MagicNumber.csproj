@@ -118,6 +118,7 @@
     <Compile Include="Core\Model\LocalServer.cs" />
     <Compile Include="Core\Model\Server.cs" />
     <Compile Include="Core\Model\Set.cs" />
+    <Compile Include="Core\SetBrushConverter.cs" />
     <Compile Include="Core\ViewModel\AddSet.cs" />
     <Compile Include="Core\ViewModel\Connect.cs" />
     <Compile Include="Core\ViewModel\Home.cs" />
