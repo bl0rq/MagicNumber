@@ -10,7 +10,7 @@ namespace MagicNumber.Core.Model
     public interface IServer
     {
         string Name { get; }
-        Set [] Sets { get; }
+        Set [ ] Sets { get; }
         void Load ( );
         void Add ( Set s, int initialBlock );
         void Remove ( Set s );
@@ -25,8 +25,8 @@ namespace MagicNumber.Core.Model
 
         public string Name { get; }
 
-        private Set [] m_sets;
-        public Set [] Sets
+        private Set [ ] m_sets;
+        public Set [ ] Sets
         {
             get { return m_sets; }
             private set { SetProperty ( ref m_sets, value ); }
@@ -45,20 +45,31 @@ namespace MagicNumber.Core.Model
         {
             StackExchange.Redis.IDatabase db = m_redis.GetDatabase ( );
             var sets = db.ListRange ( SetKey );
+
             Sets =
                 sets.Select ( o =>
                 {
-                    using ( var ms = new System.IO.MemoryStream ( o ) )
+                    using (var ms = new System.IO.MemoryStream ( o ))
                     {
                         var set = m_setSerializer.Deserialize ( ms );
 
                         var redisValue = db.StringGet ( GetCurrentBlockKey ( set ) );
-                        if ( redisValue.HasValue )
+                        if (redisValue.HasValue)
                         {
                             int intValue;
-                            if ( redisValue.TryParse ( out intValue ) )
+                            if (redisValue.TryParse ( out intValue ))
                                 set.CurrentBlock = intValue;
                         }
+
+                        //NOTE: little hack to remove keys (while a proper delete can be written)
+                        //if (set.Name == "Test" || set.Name == "SmallBlock" || set.Name == "InitValueTest")
+                        //{
+                        //    db.ListRemove ( SetKey, o );
+                        //    if (redisValue.HasValue)
+                        //    {
+                        //        db.KeyDelete ( GetCurrentBlockKey ( set ) );
+                        //    }
+                        //}
                         return set;
                     }
                 } ).ToArray ( );
@@ -68,17 +79,17 @@ namespace MagicNumber.Core.Model
         {
             StackExchange.Redis.IDatabase db = m_redis.GetDatabase ( );
             db.ListRightPush ( SetKey, SerializeSet ( s ) );
-            if ( initialBlock > 0 )
+            if (initialBlock > 0)
             {
-                db.StringSet ( GetCurrentBlockKey ( s ), (long)(initialBlock - 1));// -1 here makes getting the NEXT one get the "initial" value as specified.
+                db.StringSet ( GetCurrentBlockKey ( s ), (long)( initialBlock - 1 ) );// -1 here makes getting the NEXT one get the "initial" value as specified.
             }
             Sets = Sets.Append ( s );
         }
 
-        private byte [] SerializeSet ( Set s )
+        private byte [ ] SerializeSet ( Set s )
         {
-            byte [] data;
-            using ( var ms = new System.IO.MemoryStream ( ) )
+            byte [ ] data;
+            using (var ms = new System.IO.MemoryStream ( ))
             {
                 m_setSerializer.Serialize ( ms, s );
                 data = ms.ToArray ( );
@@ -108,7 +119,7 @@ namespace MagicNumber.Core.Model
     public class FakeServer : IServer
     {
         public string Name { get; set; }
-        public Set [] Sets { get; set; }
+        public Set [ ] Sets { get; set; }
 
         public void Load ( )
         {

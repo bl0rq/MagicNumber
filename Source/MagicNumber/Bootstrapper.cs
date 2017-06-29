@@ -17,6 +17,14 @@ namespace MagicNumber
         {
             Utilis.Messaging.Bus.Instance.Send ( new Core.Messages.LoadingProgress ( "Beginning Bootstrap..." ) );
 
+            if (string.Equals ( Environment.CurrentDirectory,
+                              System.IO.Path.Combine ( Environment.GetFolderPath ( Environment.SpecialFolder.Windows ), "system32" ),
+                              StringComparison.OrdinalIgnoreCase ))
+            {
+                // The part after ?? is for the compiler (GetDirectoryName CAN return null, but it wont here)
+                Environment.CurrentDirectory = System.IO.Path.GetDirectoryName ( System.Reflection.Assembly.GetEntryAssembly ( ).Location ) ?? "C:\\";
+            }
+
             Utilis.Runner.Dispatcher = new Utilis.Win.DispatcherWrapper ( System.Windows.Application.Current.Dispatcher );
 
             Utilis.Messaging.Bus.Instance.Send ( new Core.Messages.LoadingProgress ( "Loading config..." ) );
@@ -37,7 +45,7 @@ namespace MagicNumber
 
             Utilis.Messaging.Bus.Instance.Send ( new Core.Messages.LoadingProgress ( "Showing initial Page..." ) );
 
-            if ( string.IsNullOrEmpty ( config.ServerName ) )
+            if (string.IsNullOrEmpty ( config.ServerName ))
             {
                 var vm = Utilis.ServiceLocator.Instance.GetInstance<Core.ViewModel.Connect> ( );
                 vm.ServerName = "magicNumber.blorq.com:15613";
@@ -76,7 +84,7 @@ namespace MagicNumber
 
         public static bool To<T> ( T vm, bool removeFromBackStack = false ) where T : Utilis.UI.ViewModel.Base
         {
-            if ( removeFromBackStack )
+            if (removeFromBackStack)
                 return m_navigationService.NavigateAndRemoveCurrentFromBackStack ( vm );
             else
                 return m_navigationService.Navigate ( vm );
