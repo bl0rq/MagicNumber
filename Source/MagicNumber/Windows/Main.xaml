@@ -5,11 +5,12 @@
                               xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
                               xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                               xmlns:windows="clr-namespace:MagicNumber.Windows"
-                              Title="Main"
+                              Title="Magic Number Generator"
                               Width="1034"
                               Height="728"
                               MinWidth="146"
                               MinHeight="187"
+                              Icon="/Icon.png"
                               mc:Ignorable="d">
     <!--<i:Interaction.Behaviors>
         <behavior:PersistLocation KeyName="MainWindowPlacement" />
@@ -18,6 +19,7 @@
         <Frame x:Name="MainFrame"
                DockPanel.Dock="Top"
                Background="Transparent"
+               Navigated="MainFrame_Navigated"
                NavigationUIVisibility="Hidden"
                Source="../Pages/Splash.xaml" />
     </Grid>

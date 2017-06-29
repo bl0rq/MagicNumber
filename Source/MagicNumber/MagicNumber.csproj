@@ -34,6 +34,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Icon.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Autofac, Version=3.5.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
       <HintPath>packages\Autofac.3.5.2\lib\net40\Autofac.dll</HintPath>
@@ -177,7 +180,10 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Icon.ico" />
+    <Resource Include="Icon.png" />
+  </ItemGroup>
   <ItemGroup>
     <Page Include="Controls\LeiLogo.xaml">
       <Generator>MSBuild:Compile</Generator>

@@ -3,17 +3,16 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:controls="clr-namespace:MagicNumber.Controls"
         Title="Splash"
-        Height="100"
         Width="320"
-        WindowStartupLocation="CenterScreen"
+        Height="100"
+        Background="LightGray"
+        Icon="/Icon.png"
         ResizeMode="NoResize"
-        WindowStyle="None"
-        Background="LightGray">
-    <Window.Resources>
-
-    </Window.Resources>
-    <Grid VerticalAlignment="Stretch"
-          Margin="10,0,10,10">
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None">
+    <Window.Resources />
+    <Grid Margin="10,0,10,10"
+          VerticalAlignment="Stretch">
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
@@ -21,16 +20,16 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        <TextBlock Text="Magic Number Generator"
-                   HorizontalAlignment="Stretch"
+        <TextBlock HorizontalAlignment="Stretch"
                    VerticalAlignment="Center"
-                   TextAlignment="Justify"
-                   FontSize="26" />
-        <TextBlock Grid.Row="1"
-                   Text="Loading..."
-                   x:Name="tbLoading"
+                   FontSize="26"
+                   Text="Magic Number Generator"
+                   TextAlignment="Justify" />
+        <TextBlock x:Name="tbLoading"
+                   Grid.Row="1"
+                   Margin="0,0,0,0"
                    FontSize="18"
-                   Margin="0,0,0,0" />
+                   Text="Loading..." />
     </Grid>
 
     <!--<TextBlock Text="Loading..."
