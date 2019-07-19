@@ -52,6 +52,15 @@
                                    Background="{Binding Converter={StaticResource convSetBrush}}"
                                    Command="{Binding Command}"
                                    Foreground="#f3ddec">
+                        <controls:Tile.ToolTip>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Current block: " />
+                                <TextBlock Text="{Binding Model.CurrentBlock}" />
+                                <TextBlock Text=" Block Size: " />
+                                <TextBlock Text="{Binding Model.BlockSize}" />
+                            </StackPanel>
+
+                        </controls:Tile.ToolTip>
                         <controls:Tile.Content>
                             <Grid HorizontalAlignment="Stretch"
                                   VerticalAlignment="Stretch">
