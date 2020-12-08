@@ -9,8 +9,11 @@ namespace MagicNumber.Core.ViewModel
     [Utilis.RegisterService]
     public class TryConnect : Utilis.UI.ViewModel.Base
     {
-        public TryConnect ( string server )
+        private readonly string m_password;
+
+        public TryConnect ( string server, string password )
         {
+            m_password = password;
             ServerName = server;
 
             Message = "Loading...";
@@ -24,7 +27,7 @@ namespace MagicNumber.Core.ViewModel
             Message = "Trying to connect...";
             try
             {
-                Model.Server server = new Model.Server ( ServerName );
+                Model.Server server = new Model.Server ( ServerName, m_password );
                 Message = "Loading sets...";
                 server.Load ( );
                 Message = "Loaded " + server.Sets.Length + " sets.";
@@ -59,7 +62,7 @@ namespace MagicNumber.Core.ViewModel
 
     public class TryConnectDesign : TryConnect
     {
-        public TryConnectDesign ( ) : base ( "magicnumber.blorq.com:15613" )
+        public TryConnectDesign ( ) : base ( "magicnumber.blorq.com:15613", null )
         {
 
         }

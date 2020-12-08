@@ -28,6 +28,7 @@ namespace MagicNumber.Core.Model
         public int CurrentBlock { get; set; }
     }
 
+    [DataContract]
     public class MySet
     {
         [DataMember]

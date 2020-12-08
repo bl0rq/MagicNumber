@@ -1,35 +1,57 @@
 ﻿<local:ConnectBase x:Class="MagicNumber.Pages.Connect"
                    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                    xmlns:local="clr-namespace:MagicNumber.Pages"
+                   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                    xmlns:viewModel="clr-namespace:MagicNumber.Core.ViewModel"
-                   mc:Ignorable="d"
+                   Title="Connect"
+                   d:DataContext="{d:DesignInstance Type={x:Type viewModel:ConnectDesign},
+                                                    IsDesignTimeCreatable=True}"
                    d:DesignHeight="1200"
                    d:DesignWidth="1200"
-                   d:DataContext="{d:DesignInstance Type={x:Type viewModel:ConnectDesign}, IsDesignTimeCreatable=True}"
-                   Title="Connect">
+                   Background="White"
+                   mc:Ignorable="d">
 
-    <Grid HorizontalAlignment="Center"
-          VerticalAlignment="Center"
-          Width="300">
+    <Grid MaxWidth="600"
+          VerticalAlignment="Center">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <TextBlock Text="Server:"
-                   FontSize="{StaticResource ExtraLargeFontSize}" />
-        <TextBox Grid.Row="1"
-                 Margin="0,10,0,10"
-                 Text="{Binding ServerName}"
-                 FocusManager.FocusedElement="{Binding RelativeSource={RelativeSource Self}}" />
-        <Button Grid.Row="2"
-                Content="Connect"
-                HorizontalAlignment="Right"
-                Command="{Binding DoConnect}" />
-        <TextBlock Text="{Binding Message}" />
+        <Grid Width="300"
+              HorizontalAlignment="Center"
+              VerticalAlignment="Center">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <TextBlock FontSize="{StaticResource ExtraLargeFontSize}"
+                       Text="Server:" />
+            <TextBox Grid.Row="1"
+                     Margin="0,10,0,10"
+                     FocusManager.FocusedElement="{Binding RelativeSource={RelativeSource Self}}"
+                     Text="{Binding ServerName}" />
+            <TextBlock Grid.Row="2"
+                       FontSize="{StaticResource ExtraLargeFontSize}"
+                       Text="Password:" />
+            <TextBox Grid.Row="3"
+                     Margin="0,10,0,10"
+                     Text="{Binding Password}" />
+            <Button Grid.Row="4"
+                    HorizontalAlignment="Right"
+                    Background="{StaticResource brsPositiveBackground}"
+                    Command="{Binding DoConnect}"
+                    Content="Connect" />
+        </Grid>
+
+        <TextBlock Grid.Row="1"
+                   Margin="0,10,0,0"
+                   VerticalAlignment="Top"
+                   Text="{Binding Message}"
+                   TextWrapping="Wrap" />
     </Grid>
 </local:ConnectBase>

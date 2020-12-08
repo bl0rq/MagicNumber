@@ -18,13 +18,18 @@ namespace MagicNumber.Core.Model
 
         public void Save ( )
         {
-            System.IO.File.WriteAllText ( m_persistanceFileName, ServerName );
+            System.IO.File.WriteAllLines ( m_persistanceFileName, new [ ] { ServerName, Password } );
         }
 
         public void Load ( )
         {
             if ( System.IO.File.Exists ( m_persistanceFileName ) )
-                ServerName = System.IO.File.ReadAllText ( m_persistanceFileName );
+            {
+                var lines = System.IO.File.ReadAllLines ( m_persistanceFileName );
+                ServerName = lines.First ( );
+                if ( lines.Length > 1 )
+                    Password = lines [ 1 ];
+            }
         }
 
         private string m_serverName;
@@ -32,6 +37,13 @@ namespace MagicNumber.Core.Model
         {
             get { return m_serverName; }
             set { SetProperty ( ref m_serverName, value ); }
+        }
+
+        private string m_password;
+        public string Password
+        {
+            get { return m_password; }
+            set { SetProperty ( ref m_password, value ); }
         }
     }
 }

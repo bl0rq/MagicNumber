@@ -53,7 +53,7 @@ namespace MagicNumber
             }
             else
             {
-                var vm = new Core.ViewModel.TryConnect ( config.ServerName );
+                var vm = new Core.ViewModel.TryConnect ( config.ServerName, config.Password );
                 service.Navigate ( vm );
             }
 

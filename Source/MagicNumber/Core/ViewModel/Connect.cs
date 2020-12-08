@@ -11,7 +11,7 @@ namespace MagicNumber.Core.ViewModel
     {
         public Connect ( )
         {
-            DoConnect = new Utilis.UI.Navigation.NavigationCommand<TryConnect> ( ( ) => new TryConnect ( ServerName ), ( ) => IsValidName );
+            DoConnect = new Utilis.UI.Navigation.NavigationCommand<TryConnect> ( ( ) => new TryConnect ( ServerName, Password ), ( ) => IsValidName );
         }
         public Connect ( string serverName, string message ) : this ( )
         {
@@ -51,6 +51,13 @@ namespace MagicNumber.Core.ViewModel
             }
         }
 
+        private string m_password;
+        public string Password
+        {
+            get { return m_password; }
+            set { SetProperty ( ref m_password, value ); }
+        }
+
         private bool m_isValidName;
         public bool IsValidName
         {
@@ -72,6 +79,9 @@ namespace MagicNumber.Core.ViewModel
 
     public class ConnectDesign : Connect
     {
-
+        public ConnectDesign()
+        {
+            Message = "This will connect to a single server on the local machine using the default redis port (6379). Additional options are simply appended (comma-delimited). Ports are represented with a colon (:) as is usual. Configuration options include an = after the name. For example:";
+        }
     }
 }
