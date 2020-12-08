@@ -15,6 +15,7 @@ build/
 bld/
 [Bb]in/
 [Oo]bj/
+.vs/
 
 # MSTest test Results
 [Tt]est[Rr]esult*/
@@ -189,4 +190,4 @@ Solution/Catliis3.VC.opendb
 ReportServerEncryptionKey-LAP96-gwlund-LundLund123.snk
 *.jfm
 Source/MagicNumber/pingme.txt
-Source/
+
