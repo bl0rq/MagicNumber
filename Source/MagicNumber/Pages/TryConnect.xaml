@@ -1,26 +1,29 @@
 ﻿<local:TryConnectBase x:Class="MagicNumber.Pages.TryConnect"
                       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                       xmlns:local="clr-namespace:MagicNumber.Pages"
+                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                       xmlns:viewModel="clr-namespace:MagicNumber.Core.ViewModel"
-                      mc:Ignorable="d"
+                      Title="TryConnect"
+                      d:DataContext="{d:DesignInstance Type={x:Type viewModel:TryConnectDesign},
+                                                       IsDesignTimeCreatable=True}"
                       d:DesignHeight="1200"
                       d:DesignWidth="1200"
-                      d:DataContext="{d:DesignInstance Type={x:Type viewModel:TryConnectDesign}, IsDesignTimeCreatable=True}"
-                      Title="TryConnect">
+                      Background="{StaticResource MahApps.Brushes.Window.Background}"
+                      Foreground="{StaticResource MahApps.Brushes.IdealForeground}"
+                      mc:Ignorable="d">
 
-    <Grid HorizontalAlignment="Center"
-          VerticalAlignment="Center"
-          Width="300">
+    <Grid Width="300"
+          HorizontalAlignment="Center"
+          VerticalAlignment="Center">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <TextBlock Text="Connecting to:"
-                   FontSize="{StaticResource ExtraLargeFontSize}" />
+        <TextBlock FontSize="{StaticResource ExtraLargeFontSize}"
+                   Text="Connecting to:" />
         <TextBlock Grid.Row="1"
                    Margin="0,10,0,10"
                    Text="{Binding ServerName}" />

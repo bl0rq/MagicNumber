@@ -14,6 +14,8 @@
                                                  IsDesignTimeCreatable=True}"
                 d:DesignHeight="800"
                 d:DesignWidth="900"
+                Background="{StaticResource MahApps.Brushes.Window.Background}"
+                Foreground="{StaticResource MahApps.Brushes.IdealForeground}"
                 mc:Ignorable="d">
     <local:HomeBase.Resources>
         <system:Double x:Key="tileGraphicOpacity">.2</system:Double>

@@ -10,8 +10,10 @@
                   Title="AddSet"
                   d:DataContext="{d:DesignInstance Type={x:Type viewModel:AddSetDesign},
                                                    IsDesignTimeCreatable=True}"
-                  d:DesignHeight="1200"
-                  d:DesignWidth="1200"
+                  d:DesignHeight="300"
+                  d:DesignWidth="400"
+                  Background="{StaticResource MahApps.Brushes.Window.Background}"
+                  Foreground="{StaticResource MahApps.Brushes.IdealForeground}"
                   mc:Ignorable="d">
 
     <Grid Width="300"
@@ -51,7 +53,7 @@
                   HorizontalAlignment="Left"
                   ItemsSource="{Binding BlockSizes}"
                   SelectedValue="{Binding BlockSize}"
-                  Style="{StaticResource MetroComboBox}" />
+                  Style="{StaticResource MahApps.Styles.ComboBox}" />
 
         <TextBlock Grid.Row="2"
                    Grid.Column="1"

@@ -10,7 +10,8 @@
                                                     IsDesignTimeCreatable=True}"
                    d:DesignHeight="1200"
                    d:DesignWidth="1200"
-                   Background="White"
+                   Background="{StaticResource MahApps.Brushes.Window.Background}"
+                   Foreground="{StaticResource MahApps.Brushes.IdealForeground}"
                    mc:Ignorable="d">
 
     <Grid MaxWidth="600"
