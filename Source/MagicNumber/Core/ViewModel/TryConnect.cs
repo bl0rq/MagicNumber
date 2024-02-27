@@ -22,12 +22,12 @@ namespace MagicNumber.Core.ViewModel
 
         private void DoTryConnect ( )
         {
-            var navigationService = Utilis.ServiceLocator.Instance.GetInstance<Utilis.UI.Navigation.IService> ( );
-            var localServer = Utilis.ServiceLocator.Instance.GetInstance<Model.ILocalServer> ( );
+            var navigationService = Utilis.ServiceLocator.Instance.GetInstance<Utilis.UI.Navigation.IService> ( ) ?? throw new Exception ( "Unable to find Navigation Service!" );
+            var localServer = Utilis.ServiceLocator.Instance.GetInstance<Model.ILocalServer> ( ) ?? throw new Exception("Unable to find local server!");
             Message = "Trying to connect...";
             try
             {
-                Model.Server server = new Model.Server ( ServerName, m_password );
+                Model.Server server = new Model.Server ( ServerName, m_password, new Model.AvroSerializer() );
                 Message = "Loading sets...";
                 server.Load ( );
                 Message = "Loaded " + server.Sets.Length + " sets.";

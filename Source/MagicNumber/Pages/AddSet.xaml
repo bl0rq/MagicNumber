@@ -5,7 +5,7 @@
                   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                   xmlns:local="clr-namespace:MagicNumber.Pages"
                   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-                  xmlns:navigation="clr-namespace:Utilis.UI.Navigation;assembly=Utilis.Win"
+                  xmlns:navigation="clr-namespace:Utilis.UI.Navigation;assembly=Utilis"
                   xmlns:viewModel="clr-namespace:MagicNumber.Core.ViewModel"
                   Title="AddSet"
                   d:DataContext="{d:DesignInstance Type={x:Type viewModel:AddSetDesign},

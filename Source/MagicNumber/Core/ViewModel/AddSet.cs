@@ -23,7 +23,7 @@ namespace MagicNumber.Core.ViewModel
         {
             try
             {
-                m_server.Add ( new Model.Set ( ) { BlockSize = BlockSize, Name = SetName, Id = Guid.NewGuid ( ) }, InitialBlock );
+                m_server.Add ( new Model.Set ( ) { BlockSize = BlockSize, Name = SetName, Id = Guid.NewGuid ( ).ToString ( ) }, InitialBlock );
                 Navigate.To ( new Home ( m_server, m_localServer ) );
             }
             catch ( Exception e )

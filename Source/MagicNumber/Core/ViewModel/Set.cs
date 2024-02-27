@@ -37,7 +37,7 @@ namespace MagicNumber.Core.ViewModel
                 Core.Model.MySet myset = new Core.Model.MySet { Id = m_model.Id };
                 myset.Block = m_server.GetNextBlock ( m_model );
                 myset.Index = 0;
-                myset.LastUpdated = DateTimeOffset.UtcNow;
+                myset.LastUpdated = DateTimeOffset.UtcNow.Ticks;
                 m_localServer.AddSet ( myset );
                 MySet = myset;
             }
@@ -52,7 +52,7 @@ namespace MagicNumber.Core.ViewModel
                 else
                     MySet.Index++;
 
-                MySet.LastUpdated = DateTimeOffset.UtcNow;
+                MySet.LastUpdated = DateTimeOffset.UtcNow.Ticks;
 
                 m_localServer.UpdateSet ( MySet );
             }
@@ -65,7 +65,7 @@ namespace MagicNumber.Core.ViewModel
         }
 
         public long CurrentValue => Model.BlockSize * MySet?.Block + MySet?.Index ?? 0;
-        public string Timestamp => MySet == null ? "" : MySet.LastUpdated.ToTimestampString ( );
+        public string Timestamp => MySet == null ? "" : new DateTimeOffset(MySet.LastUpdated, TimeSpan.Zero).ToTimestampString ( );
         public string Display => MySet == null ? "--" : CurrentValue.ToString ( );
 
         private Model.Set m_model;

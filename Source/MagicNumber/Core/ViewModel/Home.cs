@@ -63,10 +63,10 @@ namespace MagicNumber.Core.ViewModel
                 Name = "magicNumber.blorq.com:15613",
                 Sets = new Model.Set []
                 {
-                    new Model.Set() {BlockSize = 1000, Id = Guid.NewGuid(), Name = "CATLIIS"},
-                    new Model.Set() {BlockSize = 512, Id = ms_dogliisFakeGuid, Name = "Dogliis"},
-                    new Model.Set() {BlockSize = 100, Id = Guid.NewGuid(), Name = "CMPO"},
-                    new Model.Set() {BlockSize = 100, Id = Guid.NewGuid(), Name = "MagicNumber"},
+                    new Model.Set() {BlockSize = 1000, Id = Guid.NewGuid().ToString(), Name = "CATLIIS"},
+                    new Model.Set() {BlockSize = 512, Id = ms_dogliisFakeGuid.ToString(), Name = "Dogliis"},
+                    new Model.Set() {BlockSize = 100, Id = Guid.NewGuid().ToString(), Name = "CMPO"},
+                    new Model.Set() {BlockSize = 100, Id = Guid.NewGuid().ToString(), Name = "MagicNumber"},
                 }
             };
             return s;
@@ -76,7 +76,7 @@ namespace MagicNumber.Core.ViewModel
         {
             var localServer = new Model.FakeLocalServer ( );
 
-            localServer.AddSet ( new Model.MySet ( ) { Id = ms_dogliisFakeGuid, Block = 3, Index = 10 } );
+            localServer.AddSet ( new Model.MySet ( ) { Id = ms_dogliisFakeGuid.ToString ( ), Block = 3, Index = 10 } );
             return localServer;
         }
     }
