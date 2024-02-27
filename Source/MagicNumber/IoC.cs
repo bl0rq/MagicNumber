@@ -15,6 +15,7 @@ namespace MagicNumber
             ContainerBuilder builder = new ContainerBuilder ( );
 
             builder.RegisterByAttribute ( typeof ( IoC ).Assembly );
+            builder.RegisterByAttribute ( typeof ( Core.Model.Config ).Assembly );
 
             //builder.Register ( context => new Lei.Config.ConfigDeviceAssemblyGuidance ( ) )
             //    .AsImplementedInterfaces ( )
