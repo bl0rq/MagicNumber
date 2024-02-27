@@ -3,7 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
+
+//using Google.Protobuf;
 using MagicNumber.Core.Extensions;
+using SolTechnology.Avro;
+using Utilis.Extensions;
 
 namespace MagicNumber.Core.Model
 {
@@ -21,7 +26,7 @@ namespace MagicNumber.Core.Model
     {
         private const string SetKey = "Sets";
         private readonly StackExchange.Redis.ConnectionMultiplexer m_redis;
-        private readonly Microsoft.Hadoop.Avro.IAvroSerializer<Set> m_setSerializer;
+        private readonly ISerializer m_serializer;
 
         public string Name { get; }
 
@@ -32,15 +37,29 @@ namespace MagicNumber.Core.Model
             private set { SetProperty ( ref m_sets, value ); }
         }
 
-        public Server ( string name, string password )
+        public Server ( string name, string password, ISerializer serializer )
         {
-            Utilis.Contract.AssertNotEmpty ( ( ) => name, name );
-            Name = name;
-            m_redis = string.IsNullOrEmpty ( password )
-                ? StackExchange.Redis.ConnectionMultiplexer.Connect ( name )
-                : StackExchange.Redis.ConnectionMultiplexer.Connect ( name + ",Password=" + password );
+            Name = Utilis.Contract.AssertNotEmpty ( ( ) => name, name );
+            m_serializer = Utilis.Contract.AssertNotNull ( ( ) => serializer, serializer );
 
-            m_setSerializer = Microsoft.Hadoop.Avro.AvroSerializer.Create<Set> ( );
+            //var connectionString = name + ",protocol=Resp2,Ssl=True,SslProtocols=Tls13";
+            //if ( !string.IsNullOrEmpty ( password ) )
+            //{
+            //    connectionString += ",Password=" + password;
+            //}
+            //m_redis = StackExchange.Redis.ConnectionMultiplexer.Connect ( connectionString );
+
+            //m_redis = string.IsNullOrEmpty ( password )
+            //    ? StackExchange.Redis.ConnectionMultiplexer.Connect (
+            //        new StackExchange.Redis.ConfigurationOptions ( )
+            //        {
+            //            Protocol = StackExchange.Redis.RedisProtocol.Resp2,
+            //            SslProtocols = System.Security.Authentication.SslProtocols.Tls13
+            //        } ) //name )
+            //    : StackExchange.Redis.ConnectionMultiplexer.Connect ( name + ",Password=" + password );
+            m_redis = string.IsNullOrEmpty ( password )
+                ? StackExchange.Redis.ConnectionMultiplexer.Connect (name )
+                : StackExchange.Redis.ConnectionMultiplexer.Connect ( name + ",Password=" + password );
         }
 
         public void Load ( )
@@ -51,9 +70,10 @@ namespace MagicNumber.Core.Model
             Sets =
                 sets.Select ( o =>
                 {
-                    using ( var ms = new System.IO.MemoryStream ( o ) )
+                    //using ( var ms = new System.IO.MemoryStream ( o ) )
                     {
-                        var set = m_setSerializer.Deserialize ( ms );
+                        var set = m_serializer.Deserialize<Set> ( o );
+                        set.EnsureLazy ( );
 
                         var redisValue = db.StringGet ( GetCurrentBlockKey ( set ) );
                         if ( redisValue.HasValue )
@@ -80,7 +100,7 @@ namespace MagicNumber.Core.Model
         public void Add ( Set s, int initialBlock )
         {
             StackExchange.Redis.IDatabase db = m_redis.GetDatabase ( );
-            db.ListRightPush ( SetKey, SerializeSet ( s ) );
+            db.ListRightPush ( SetKey, m_serializer.Serialize ( s ) );
             if ( initialBlock > 0 )
             {
                 db.StringSet ( GetCurrentBlockKey ( s ), (long)( initialBlock - 1 ) );// -1 here makes getting the NEXT one get the "initial" value as specified.
@@ -88,21 +108,12 @@ namespace MagicNumber.Core.Model
             Sets = Sets.Append ( s );
         }
 
-        private byte [] SerializeSet ( Set s )
-        {
-            byte [] data;
-            using ( var ms = new System.IO.MemoryStream ( ) )
-            {
-                m_setSerializer.Serialize ( ms, s );
-                data = ms.ToArray ( );
-            }
-            return data;
-        }
-
         public void Remove ( Set s )
         {
             StackExchange.Redis.IDatabase db = m_redis.GetDatabase ( );
-            db.ListRemove ( SetKey, SerializeSet ( s ) );
+            db.ListRemove ( SetKey, m_serializer.Serialize ( s ) );
+
+            Sets = Sets.Remove ( s );
         }
 
         public int GetNextBlock ( Set s )
@@ -114,7 +125,7 @@ namespace MagicNumber.Core.Model
 
         private StackExchange.Redis.RedisKey GetCurrentBlockKey ( Set set )
         {
-            return "Set/" + set.Id.ToString ( "N" ) + "/CurrentBlock";
+            return "Set/" + set.IdAsGuid.Value.ToString ( "N" ) + "/CurrentBlock";
         }
     }
 

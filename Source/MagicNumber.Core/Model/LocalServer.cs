@@ -56,7 +56,7 @@ namespace MagicNumber.Core.Model
 
         public void AddSet ( MySet set )
         {
-            if ( set.Id == Guid.Empty )
+            if ( set.IdAsGuid.Value == Guid.Empty )
                 throw new ArgumentException ( "Invalid SetId (empty)", nameof ( set ) );
             if ( m_mySets.Contains ( set ) || m_mySets.Any ( o => o.Id == set.Id ) )
                 throw new ArgumentException ( "Set already added.", nameof ( set ) );
@@ -66,7 +66,7 @@ namespace MagicNumber.Core.Model
 
         public void UpdateSet ( MySet set )
         {
-            if ( set.Id == Guid.Empty )
+            if ( set.IdAsGuid.Value == Guid.Empty )
                 throw new ArgumentException ( "Invalid SetId (empty)", nameof ( set ) );
             if ( !m_mySets.Contains ( set ) || m_mySets.All ( o => o.Id != set.Id ) )
                 throw new ArgumentException ( "Set not added.", nameof ( set ) );

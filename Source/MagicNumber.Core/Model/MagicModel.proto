@@ -1,0 +1,19 @@
+﻿syntax = "proto3";
+
+package MagicNumber;
+
+option csharp_namespace = "MagicNumber.Core.Model";
+
+message Set {
+    string Id = 1;
+    string Name = 2;
+    int32 BlockSize = 3;
+}
+
+message MySet
+{
+    string Id = 1;
+    int32 Block = 2;
+    uint32 Index = 3;
+    int64 LastUpdated = 4;
+}
