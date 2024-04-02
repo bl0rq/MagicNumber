@@ -27,7 +27,9 @@ namespace MagicNumber.Core.ViewModel
             Message = "Trying to connect...";
             try
             {
-                Model.Server server = new Model.Server ( ServerName, m_password, new Model.AvroSerializer() );
+                //Model.Server server = new Model.Server ( ServerName, m_password, new Model.AvroSerializer() );
+                Model.AzureServer server = new Model.AzureServer ( ServerName );
+
                 Message = "Loading sets...";
                 server.Load ( );
                 Message = "Loaded " + server.Sets.Length + " sets.";

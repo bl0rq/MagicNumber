@@ -48,7 +48,7 @@ namespace MagicNumber
             if (string.IsNullOrEmpty ( config.ServerName ))
             {
                 var vm = Utilis.ServiceLocator.Instance.GetInstance<Core.ViewModel.Connect> ( );
-                vm.ServerName = "magicNumber.blorq.com:15613";
+                vm.ServerName = "https://magicgc.azurewebsites.net/";
                 service.Navigate ( vm );
             }
             else
